@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player de Vídeo em Tela Cheia Automático</title>
+  <!-- Adicione o CSS do Video.js -->
+  <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />
+  <style>
+    /* Estilos adicionais */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    #my-video {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Adicione o vídeo com a tag <video> e o atributo autoplay -->
+  <video id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}" autoplay>
+    <!-- Adicione as fontes do vídeo -->
+    <source src="https://xn--4yyxpd9bwkc3pt40i0thra3jpmwjmpn6s6d12sl2vq7yjb88e3jg-eb5brl.bnih8hbhyn2hif0bqm8xlnwa886tsrwbpwrvg7oalg4weca5dfuhkfb51z7u2lj.foo/a2/docs/boborj/__index.m3u8?mu3zAQc9HC3GbwJq=FBf7L_WLjpDJmRUaMUW-Ng&3U1G7qaTxrPbalZnEx=1713151947" type="application/x-mpegURL">
+    <!-- Fallback para navegadores que não suportam HTML5 -->
+    <p class="vjs-no-js">
+      Para visualizar este vídeo, ative o JavaScript e considere atualizar para um navegador da web que
+      <a href="https://videojs.com/html5-video-support/" target="_blank" rel="noopener">suporte vídeos HTML5</a>.
+    </p>
+  </video>
+
+  <!-- Adicione o JavaScript do Video.js -->
+  <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script>
+  <script>
+    // Adicione o código JavaScript para entrar em tela cheia automaticamente
+    var myPlayer = videojs('my-video');
+    myPlayer.ready(function() {
+      // Inicia a reprodução
+      this.play();
+      // Solicita o modo de tela cheia quando o vídeo estiver pronto para ser reproduzido
+      this.on('play', function() {
+        if (this.requestFullscreen) {
+          this.requestFullscreen();
+        } else if (this.msRequestFullscreen) {
+          this.msRequestFullscreen();
+        } else if (this.mozRequestFullScreen) {
+          this.mozRequestFullScreen();
+        } else if (this.webkitRequestFullscreen) {
+          this.webkitRequestFullscreen();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
